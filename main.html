@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Triangle Type Calculator - Christos Katsikiotis</title>
+    <meta name="description" content="Triangle Type Calculator - Christos Katsikiotis">
+    <meta name="author" content="SitePoint">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://d5wfroyti11sa.cloudfront.net/prod/client/ts-10.0.25.min.css"/>
+
+    <script src="http://localhost:10111/dist/ts.js"></script>
+</head>
+
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Triangle Type Calculator</h1>
+            </div>
+        </div>
+    </section>
+    <!--Bulma's Header-->
+
+    <div id="mainSection">
+        <div id="shapeHolder">
+            <canvas id='triangle-canvas'></canvas>
+        </div>
+        <div id="inputHolder">
+            <div class="inputField">
+                Side1: <input type="text" name="Side1" id="inputField1" value="150"><br>
+            </div>
+            <div class="inputField">
+                Side2: <input type="text" name="Side2" id="inputField2" value="140"><br>
+            </div>
+            <div class="inputField">
+                Side3: <input type="text" name="Side3" id="inputField3" value="100"><br>
+            </div>
+            <div class="inputField">
+                <button data-ts="Button" class="ts-primary">
+                    <span>Primary</span>
+                </button>
+                <!--<button onclick="calculateTriangleType()">Calculate</button>-->
+            </div>
+        </div>
+        <div id="resultsHolder">
+            The triangle is:
+            <div id="triangleResults" class="title"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>Coded by Christos Katsikiotis for Tradeshift - 2018</p>
+        </div>
+    </footer>
+    <!--Bulma's Footer-->
+
+</body>
+
+<script src="js/script.js"></script>
+
+</html>
+
+
+<!--What needs to be done:-->
+<!--1. HTML Minify-->
+<!--2. Redraw on resize-->
+<!--3. Canvas upscale for retinas-->

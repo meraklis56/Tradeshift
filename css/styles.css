@@ -1,0 +1,28 @@
+#shapeHolder {
+    min-height: 20vh;
+}
+
+canvas {
+    display:block;
+} /* To remove the scrollbars */
+
+
+#inputHolder {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+#triangleResults {
+    text-align: center;
+    color: #00d1b2;
+    font-size: 15vw;
+}
+
+#resultsHolder{
+    text-align: center;
+}
