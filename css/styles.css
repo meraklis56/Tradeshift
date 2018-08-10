@@ -2,6 +2,10 @@ body {
     overflow: auto !important;
 } /* To enable scrollbars when it is needed */
 
+h1.title {
+    text-align: center;
+}
+
 #shapeHolder {
     min-height: 20vh;
 }
@@ -33,6 +37,10 @@ canvas {
 }
 
 @media (min-width: 600px) {
+
+    h1.title {
+        text-align: left;
+    }
 
     #mainSection{
         display: flex;

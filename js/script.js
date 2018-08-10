@@ -83,12 +83,47 @@ function calculateTriangleType() {
 
     let myTriangle = Triangle.create(side1, side2, side3);
 
-    drawTriangleOnCanvas(canvas, myTriangle);
+    if (errorDetection(side1, 'inputError1') && errorDetection(side2, 'inputError2') && errorDetection(side3, 'inputError3')) {
+        drawTriangleOnCanvas(canvas, myTriangle);
 
-    document.getElementById('triangleResults').textContent = myTriangle.getTriangleType();
+        document.getElementById('triangleResults').textContent = myTriangle.getTriangleType();
+    } else {
+        document.getElementById('triangleResults').textContent = 'Error Input';
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
 }
 
-let tr = Triangle.create(150,140,100);
+function errorDetection(value, errorDivID) {
+    let errorDiv = document.getElementById(errorDivID);
+    document.getElementById(errorDivID).innerHTML = '';
+
+    if (value < 0) {
+        let errorDT = document.createElement('dt');
+        errorDT.textContent = 'Error:';
+
+        let errorDD = document.createElement('dd');
+        errorDD.textContent = 'Only positive values are allowed';
+
+        errorDiv.append(errorDT);
+        errorDiv.append(errorDD);
+        return false;
+    } else if (isNaN(value)) {
+        let errorDT = document.createElement('dt');
+        errorDT.textContent = 'Error:';
+
+        let errorDD = document.createElement('dd');
+        errorDD.textContent = 'Invalid input';
+
+        errorDiv.append(errorDT);
+        errorDiv.append(errorDD);
+        return false;
+    }
+    return true;
+}
+
+let tr = Triangle.create(5,140,100);
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
