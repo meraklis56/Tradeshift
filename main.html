@@ -8,9 +8,15 @@
     <meta name="author" content="SitePoint">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
-    <link rel="stylesheet" href="https://d5wfroyti11sa.cloudfront.net/prod/client/ts-10.0.25.min.css"/>
+    <!--BULMA CSS-->
+
+    <link rel="stylesheet" href="css/styles.css">
+    <!--Custom CSS-->
 
     <script src="http://localhost:10111/dist/ts.js"></script>
+    <!--Tradeshift UI - JS-->
+    <link rel="stylesheet" href="https://d5wfroyti11sa.cloudfront.net/prod/client/ts-10.0.25.min.css"/>
+    <!--Tradeshift UI - CSS-->
 </head>
 
 <body>
@@ -29,20 +35,32 @@
             <canvas id='triangle-canvas'></canvas>
         </div>
         <div id="inputHolder">
-            <div class="inputField">
-                Side1: <input type="text" name="Side1" id="inputField1" value="150"><br>
-            </div>
-            <div class="inputField">
-                Side2: <input type="text" name="Side2" id="inputField2" value="140"><br>
-            </div>
-            <div class="inputField">
-                Side3: <input type="text" name="Side3" id="inputField3" value="100"><br>
-            </div>
-            <div class="inputField">
-                <button data-ts="Button" class="ts-primary">
-                    <span>Primary</span>
+            <form data-ts="Form">
+                <fieldset>
+                    <label>
+                        <span>Side1</span>
+                        <input id="inputField1" type="number" value="150"/>
+                    </label>
+                    <dl class="ts-errors" id="inputError1"></dl>
+                    <label>
+                        <span>Side2</span>
+                        <input id="inputField2" type="number" value="140"/>
+                    </label>
+                    <dl class="ts-errors" id="inputError2">
+                        <dt>Error:</dt>
+                        <dd>An explanation of the error in question</dd>
+                    </dl>
+                    <label>
+                        <span>Side3</span>
+                        <input id="inputField3" type="number" value="100"/>
+                    </label>
+                    <dl class="ts-errors" id="inputError3"></dl>
+                </fieldset>
+            </form>
+            <div class="buttonHolder">
+                <button data-ts="Button" class="ts-primary" onclick="calculateTriangleType()">
+                    <span>Calculate</span>
                 </button>
-                <!--<button onclick="calculateTriangleType()">Calculate</button>-->
             </div>
         </div>
         <div id="resultsHolder">

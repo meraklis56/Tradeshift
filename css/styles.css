@@ -1,20 +1,24 @@
+body {
+    overflow: auto !important;
+} /* To enable scrollbars when it is needed */
+
 #shapeHolder {
     min-height: 20vh;
 }
 
 canvas {
-    display:block;
+    display: block;
 } /* To remove the scrollbars */
-
 
 #inputHolder {
     display: flex;
     flex-direction: column;
 }
 
-.inputField{
-    text-align: center;
+.buttonHolder{
+    display: flex;
     margin-bottom: 2%;
+    justify-content: center;
 }
 
 #triangleResults {
@@ -25,4 +29,25 @@ canvas {
 
 #resultsHolder{
     text-align: center;
+    font-size: 2vh;
+}
+
+@media (min-width: 600px) {
+
+    #mainSection{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #shapeHolder {
+        width: 50%;
+    }
+
+    #inputHolder {
+        width: 50%;
+    }
+
+    #resultsHolder {
+        width: 100%;
+    }
 }

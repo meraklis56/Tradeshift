@@ -96,12 +96,11 @@ const windowHeight = window.innerHeight;
 
 const canvas = document.getElementById('triangle-canvas');
 
-canvas.width = windowWidth; // 100% of width
-canvas.height = windowHeight / 5; // 20% of height
-// setting the width and the height of canvas
+if (windowWidth < 600) {
+    canvas.width = windowWidth; // 100% of width
+    canvas.height = windowHeight / 5; // 20% of height
+} else {
+    canvas.width = document.getElementById('shapeHolder').clientWidth;
+}// setting the width and the height of canvas
 
 drawTriangleOnCanvas(canvas, tr);
-
-ts.ui.ready(function() {
-    console.log('UI');
-});
