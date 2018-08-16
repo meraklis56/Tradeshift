@@ -24,15 +24,25 @@ class Polygon {
 class Triangle extends Polygon{
 
     getTriangleType() {
+
         if (this.sidesLength.length === 3) {
-            if (this.sidesLength[0] === this.sidesLength[1] && this.sidesLength[1] === this.sidesLength[2]) {
-                return 'equilateral';
-            } else if (this.sidesLength[0] === this.sidesLength[1] || this.sidesLength[1] === this.sidesLength[2] ||
-                this.sidesLength[0] === this.sidesLength[2]) {
-                return 'isosceles';
+            console.log(this.sidesLength);
+            console.log(!this.sidesLength.some(isNaN));
+            if (!this.sidesLength.some(isNaN)) {
+                if (this.sidesLength[0] === this.sidesLength[1] && this.sidesLength[1] === this.sidesLength[2]) {
+                    return 'equilateral';
+                } else if (this.sidesLength[0] === this.sidesLength[1] || this.sidesLength[1] === this.sidesLength[2] ||
+                    this.sidesLength[0] === this.sidesLength[2]) {
+                    return 'isosceles';
+                } else {
+                    return 'scalene';
+                }
             } else {
-                return 'scalene';
+                return 'wrong input';
             }
+
+        } else {
+            return 'unexpected number of given sides';
         }
     }
 
@@ -43,21 +53,21 @@ class Triangle extends Polygon{
 
 // This function draws the triangle on the given canvas
 function drawTriangleOnCanvas(canvas, triangle) {
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let ctx = canvas.getContext('2d');
+    emptyCanvas(canvas);
 
     try {
         let Side1 = triangle.getSidesLength()[0];
         let Side2 = triangle.getSidesLength()[1];
         let Side3 = triangle.getSidesLength()[2];
 
-        var Ax = 0, Ay = 0;
-        var Bx = Side3, By = 0;
-        var Cx = (Side2 * Side1 + Side3 * Side3 - Side1 * Side1) / (2 * Side3);
-        var Cy = Math.sqrt(Side2 * Side2 - Cx * Cx);
+        let Ax = 0, Ay = 0;
+        let Bx = Side3, By = 0;
+        let Cx = (Side2 * Side1 + Side3 * Side3 - Side1 * Side1) / (2 * Side3);
+        let Cy = Math.sqrt(Side2 * Side2 - Cx * Cx);
 
-        var Ox = canvas.width / 2 - Bx / 2;
-        var Oy = canvas.height / 2 + Cy / 2;
+        let Ox = canvas.width / 2 - Bx / 2;
+        let Oy = canvas.height / 2 + Cy / 2;
 
         ctx.beginPath();
         ctx.moveTo(Ox + Ax, Oy - Ay);
@@ -68,15 +78,22 @@ function drawTriangleOnCanvas(canvas, triangle) {
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.fill();
+        // algorithm to draw a triangle given the sides' length on a canvas
     } catch (error) {
         console.log('An error occurred: ' + error);
     }
 }
 
+// It empties the canvas
+function emptyCanvas(canvas) {
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 // This is the main function. It draws the triangle using drawTriangleOnCanvas()
 // calculates the type of triangle(isosceles, equilateral, scalene) and prints it
 // to the user
-function calculateTriangleType() {
+function calculateTriangleType(resultID) {
     let side1 = parseFloat(document.getElementById('inputField1').value);
     let side2 = parseFloat(document.getElementById('inputField2').value);
     let side3 = parseFloat(document.getElementById('inputField3').value);
@@ -85,19 +102,22 @@ function calculateTriangleType() {
 
     if (errorDetection(side1, 'inputError1') && errorDetection(side2, 'inputError2') && errorDetection(side3, 'inputError3')) {
         drawTriangleOnCanvas(canvas, myTriangle);
-
-        document.getElementById('triangleResults').textContent = myTriangle.getTriangleType();
+        document.getElementById(resultID).textContent = myTriangle.getTriangleType();
     } else {
-        document.getElementById('triangleResults').textContent = 'Error Input';
-        var ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        document.getElementById(resultID).textContent = 'Error Input';
+        emptyCanvas(canvas);
     }
-
 }
 
+// Its main responsibility is to check if the values are valid
+// Values must be:
+// 1. Positive
+// 2. Contain valid characters only (no -) eg. "5-20"
+// It must be noted that the input field doesn't accept characters by default
 function errorDetection(value, errorDivID) {
     let errorDiv = document.getElementById(errorDivID);
     document.getElementById(errorDivID).innerHTML = '';
+    // empties the error Div
 
     if (value < 0) {
         let errorDT = document.createElement('dt');
@@ -108,6 +128,7 @@ function errorDetection(value, errorDivID) {
 
         errorDiv.append(errorDT);
         errorDiv.append(errorDD);
+
         return false;
     } else if (isNaN(value)) {
         let errorDT = document.createElement('dt');
@@ -118,12 +139,13 @@ function errorDetection(value, errorDivID) {
 
         errorDiv.append(errorDT);
         errorDiv.append(errorDD);
+
         return false;
     }
     return true;
 }
 
-let tr = Triangle.create(5,140,100);
+let tr = Triangle.create(150,140,100);
 
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
@@ -136,6 +158,6 @@ if (windowWidth < 600) {
     canvas.height = windowHeight / 5; // 20% of height
 } else {
     canvas.width = document.getElementById('shapeHolder').clientWidth;
-}// setting the width and the height of canvas
+} // setting the width and the height of canvas depending on the device's screen width
 
 drawTriangleOnCanvas(canvas, tr);

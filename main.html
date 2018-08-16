@@ -17,6 +17,11 @@
     <!--Tradeshift UI - JS-->
     <link rel="stylesheet" href="https://d5wfroyti11sa.cloudfront.net/prod/client/ts-10.0.25.min.css"/>
     <!--Tradeshift UI - CSS-->
+
+     <!--Load the QUnit CSS file from CDN - Require to display our tests attractively -->
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.18.0.css">
+     <!--Pure CSS is a minimalist CSS file we have included to make things look nicer -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 </head>
 
 <body>
@@ -34,6 +39,7 @@
         <div id="shapeHolder">
             <canvas id='triangle-canvas'></canvas>
         </div>
+
         <div id="inputHolder">
             <form data-ts="Form">
                 <fieldset>
@@ -55,16 +61,18 @@
                 </fieldset>
             </form>
             <div class="buttonHolder">
-                <button data-ts="Button" class="ts-primary" onclick="calculateTriangleType()">
+                <button data-ts="Button" class="ts-primary" onclick="calculateTriangleType('triangleResults')">
                     <span>Calculate</span>
                 </button>
             </div>
         </div>
+
         <div id="resultsHolder">
             The triangle is:
             <div id="triangleResults" class="title"></div>
         </div>
     </div>
+    <!--Input, canvas and results section-->
 
     <footer class="footer">
         <div class="content has-text-centered">
@@ -73,14 +81,76 @@
     </footer>
     <!--Bulma's Footer-->
 
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <!--QUnit results-->
 </body>
 
+<!-- Triangle script -->
 <script src="js/script.js"></script>
+
+<!-- Load the QUnit Testing Framework from CDN -->
+<script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
+
+<!-- Tests -->
+<script>
+
+    var debug = false;
+
+    if (!debug) {
+        document.getElementById('qunit').style.visibility = 'hidden';
+        document.getElementById('qunit-fixture').style.visibility = 'hidden';
+    } else {
+        test('This sample test should always pass!', function(assert) {
+            var result = 1 + 1;
+            assert.equal(result, 2); // just so we know everything loaded ok
+        });
+
+        test('Equilateral triangle!', function(assert) {
+            let tr = Triangle.create(100, 100, 100);
+            assert.equal(tr.getTriangleType(), 'equilateral');
+        });
+
+        test('Equilateral triangle 2!', function(assert) {
+            let tr2 = Triangle.create(200, 200, 200);
+            assert.equal(tr2.getTriangleType(), 'equilateral');
+        });
+
+        test('Isosceles triangle!', function(assert) {
+            let tr3 = Triangle.create(150, 200, 200);
+            assert.equal(tr3.getTriangleType(), 'isosceles');
+        });
+
+        test('Isosceles triangle 2!', function(assert) {
+            let tr4 = Triangle.create(50, 100, 100);
+            assert.equal(tr4.getTriangleType(), 'isosceles');
+        });
+
+        test('Scalene triangle!', function(assert) {
+            let tr5 = Triangle.create(50, 100, 150);
+            assert.equal(tr5.getTriangleType(), 'scalene');
+        });
+
+        test('Scalene triangle 2!', function(assert) {
+            let tr6 = Triangle.create(150, 200, 100);
+            assert.equal(tr6.getTriangleType(), 'scalene');
+        });
+
+        test('Less sides input!', function(assert) {
+            let tr7 = Triangle.create(100, 100);
+            assert.equal(tr7.getTriangleType(), 'unexpected number of given sides');
+        });
+
+        test('String input!', function(assert) {
+            let tr8 = Triangle.create(50, 'wrong', 100);
+            assert.equal(tr8.getTriangleType(), 'wrong input');
+        });
+    }
+
+</script>
 
 </html>
 
-
 <!--What needs to be done:-->
-<!--1. HTML Minify-->
-<!--2. Redraw on resize-->
-<!--3. Canvas upscale for High Res screens(retina etc.)-->
+<!--1. Canvas upscale for High Res screens(retina etc.)-->
+<!--2. Fix algorithm on painting the triangle on canvas-->
