@@ -42,6 +42,6 @@ Tradeshift's components were used to create the layout alongside with the design
 
 More Tradeshify component's could be used but since the application has low complexity they were ignored. Like global-menu.
 
-======
+---
 
 In addition, a small text was added in the end of .html for possible future work to enchance the quality of the application.
