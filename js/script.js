@@ -26,8 +26,6 @@ class Triangle extends Polygon{
     getTriangleType() {
 
         if (this.sidesLength.length === 3) {
-            console.log(this.sidesLength);
-            console.log(!this.sidesLength.some(isNaN));
             if (!this.sidesLength.some(isNaN)) {
                 if (this.sidesLength[0] === this.sidesLength[1] && this.sidesLength[1] === this.sidesLength[2]) {
                     return 'equilateral';
