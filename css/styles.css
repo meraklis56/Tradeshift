@@ -10,10 +10,6 @@ h1.title {
     min-height: 20vh;
 }
 
-canvas {
-    display: block;
-} /* To remove the scrollbars */
-
 #inputHolder {
     display: flex;
     flex-direction: column;
@@ -58,4 +54,4 @@ canvas {
     #resultsHolder {
         width: 100%;
     }
-}
+} /* Tablet, Laptop, PC layout */

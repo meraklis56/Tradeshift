@@ -145,6 +145,8 @@ function errorDetection(value, errorDivID) {
     return true;
 }
 
+
+
 let tr = Triangle.create(150,140,100);
 
 const windowWidth = window.innerWidth;

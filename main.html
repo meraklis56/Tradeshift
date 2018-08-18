@@ -95,14 +95,14 @@
 <!-- Tests -->
 <script>
 
-    var debug = false;
+    var debug = false; // change this if you want to run tests
 
     if (!debug) {
         document.getElementById('qunit').style.visibility = 'hidden';
         document.getElementById('qunit-fixture').style.visibility = 'hidden';
     } else {
         test('This sample test should always pass!', function(assert) {
-            var result = 1 + 1;
+            let result = 1 + 1;
             assert.equal(result, 2); // just so we know everything loaded ok
         });
 
@@ -152,5 +152,20 @@
 </html>
 
 <!--What needs to be done:-->
+
 <!--1. Canvas upscale for High Res screens(retina etc.)-->
+<!--https://www.html5rocks.com/en/tutorials/canvas/hidpi/-->
+
 <!--2. Fix algorithm on painting the triangle on canvas-->
+<!--Currently the triangle is not drawn accurately when low values
+<!--are inserted (<36). For example the triangles-->
+<!--[150,140,100] and [5,140,100] are almost identical-->
+<!--Code source:-->
+<!--https://stackoverflow.com/questions/41063695/draw-a-triangle-in-html-canvas-based-on-three-given-lenths-->
+
+<!--3. Redraw on window resizing-->
+<!--Currently, when the window is resizing, the canvas remains-->
+<!--the same making it to be under the input form. As a solution-->
+<!--it is suggested to make a javascript function to redraw it-->
+<!--on every window resize.-->
+<!--http://htmlcheats.com/html/resize-the-html5-canvas-dyamically/-->
