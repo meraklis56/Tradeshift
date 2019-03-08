@@ -1,4 +1,4 @@
-# Tradeshift Application 2018
+# Tradeshift Front-End Application 2018
 
 I was asked to create an application that is able to identify the type of a triangle depending on the length of the sides. The thoery of trigonometry says:
 
